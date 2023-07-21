@@ -28,44 +28,73 @@
 
 // Array.prototype.filter()
 // 1. Filter the list of inventors for those who were born in the 1500's
-const born1500 = inventors.filter((inventor) => {
+const nascidosEm1500 = inventors.filter((inventor) => {
   if (inventor.year >= 1500 && inventor.year < 1600) {
     return inventor;
   }
 });
-console.table(born1500);
+console.table(nascidosEm1500);
 
 
 // Array.prototype.map()
 // 2. Give us an array of the inventors first and last names
-const fullNames = inventors.map((inventor) => {
+const nomeCompleto = inventors.map((inventor) => {
   return `${inventor.first} ${inventor.last}`
 });
-console.table(fullNames);
+console.table(nomeCompleto);
 
 // Array.prototype.sort()
 // 3. Sort the inventors by birthdate, oldest to youngest
-const ordered = inventors.sort((a, b) => {
+const ordenadoPorIdade = inventors.sort((a, b) => {
   if (a.year > b.year) {
     return 1;
   } else {
     return -1;
   }
 });
-console.table(ordered);
+console.table(ordenadoPorIdade);
 
 // Array.prototype.reduce()
 // 4. How many years did all the inventors live all together?
+const totalAnosVividos = inventors.reduce((total, inventor) => {
+  return total + (inventor.passed - inventor.year);
+},0);
+console.log(totalAnosVividos);
 
 // 5. Sort the inventors by years lived
+const viveuMais = inventors.sort((a, b) => {
+  if ((a.passed - a.year) > (b.passed - b.year)) {
+    return -1;
+  } else {
+    return 1;
+  }
+});
+console.table(viveuMais);
 
 // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
 // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-
+// const categoria = document.querySelector('.mw-category');
+// const links = Array.from(categoria.querySelectorAll('a'));
+// const listaNome = links.map((link) => link.textContent).filter((nomeDaRua) => nomeDaRua.includes('de'));
 
 // 7. sort Exercise
 // Sort the people alphabetically by last name
+const ordemAlfabetica = people.sort((lastOne, nextOne) => {
+  const [aLast, aFirst] = lastOne.split(', ');
+  const [bLast, bFirst] = nextOne.split(', ');
+  return aLast > bLast ? 1 : -1;
+});
+console.log(ordemAlfabetica);
+
 
 // 8. Reduce Exercise
 // Sum up the instances of each of these
-    const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck'];
+const transportes = data.reduce((obj, item) => {
+  if (!obj[item]) {
+    obj[item] = 0;
+  }
+  obj[item]++;
+  return obj;
+}, {})
+console.log(transportes);
